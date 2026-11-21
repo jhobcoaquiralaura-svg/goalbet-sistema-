@@ -1,0 +1,1538 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GOALBET - Portal Oficial de Resúmenes, Pronósticos y Deportes</title>
+  
+  <!-- Tipografía Montserrat y Roboto + Iconos -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,700;0,800;0,900;1,800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    /* DESPLAZAMIENTO SUAVE NATIVO */
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+    }
+
+    :root {
+      --bg-dark: #071220;
+      --bg-card: #0d1f35;
+      --primary-blue: #143054;
+      --accent-green: #00e676;
+      --green-dark: #00b359;
+      --accent-yellow: #fbc02d;
+      --text-white: #ffffff;
+      --text-gray: #9fb3c8;
+      --border-blue: #1a3c66;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-white);
+      min-height: 100vh;
+    }
+
+    /* 1. TICKER SUPERIOR */
+    .top-ticker {
+      background: linear-gradient(90deg, #00b359, var(--accent-green));
+      color: #071220;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      font-size: 0.88rem;
+      font-weight: 800;
+    }
+
+    .ticker-tag {
+      background: #071220;
+      color: var(--accent-green);
+      padding: 0 20px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 2;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .ticker-scroll {
+      white-space: nowrap;
+      display: inline-block;
+      animation: tickerAnim 28s linear infinite;
+      padding-left: 100%;
+    }
+
+    @keyframes tickerAnim {
+      0% { transform: translate3d(0, 0, 0); }
+      100% { transform: translate3d(-100%, 0, 0); }
+    }
+
+    /* 2. ENCABEZADO */
+    .header {
+      background: #091729;
+      padding: 18px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--border-blue);
+    }
+
+    .brand-box h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      color: #fff;
+    }
+
+    .brand-box h1 span {
+      color: var(--accent-yellow);
+      text-shadow: 0 0 12px rgba(251, 192, 45, 0.4);
+    }
+
+    .brand-box p {
+      font-size: 0.78rem;
+      color: var(--accent-green);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 700;
+    }
+
+    .contact-fast {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      background: var(--primary-blue);
+      border: 1px solid var(--border-blue);
+      padding: 8px 16px;
+      border-radius: 10px;
+    }
+
+    .contact-fast i {
+      font-size: 1.6rem;
+      color: var(--accent-green);
+    }
+
+    .contact-fast .phone {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .contact-fast .mail {
+      font-size: 0.78rem;
+      color: var(--text-gray);
+    }
+
+    /* 3. MENÚ DE NAVEGACIÓN BLINDADO */
+    .nav-bar {
+      background: #0d223c;
+      padding: 0 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      border-bottom: 3px solid var(--accent-green);
+    }
+
+    .nav-tabs {
+      display: flex;
+      list-style: none;
+    }
+
+    .nav-link-btn {
+      color: #cbd5e1;
+      padding: 16px 20px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: all 0.2s;
+      border-bottom: 3px solid transparent;
+    }
+
+    .nav-link-btn:hover {
+      color: var(--accent-green);
+      background: rgba(0, 230, 118, 0.08);
+      border-bottom-color: var(--accent-green);
+    }
+
+    .nav-search {
+      display: flex;
+      align-items: center;
+      background: #071526;
+      border: 1px solid var(--border-blue);
+      border-radius: 20px;
+      padding: 5px 14px;
+    }
+
+    .nav-search input {
+      background: transparent;
+      border: none;
+      color: #fff;
+      outline: none;
+      padding: 4px;
+      font-size: 0.85rem;
+      width: 170px;
+    }
+
+    /* 4. BANNER HERO */
+    .hero-banner {
+      position: relative;
+      background: linear-gradient(180deg, rgba(7, 18, 32, 0.3) 0%, rgba(7, 18, 32, 0.96) 100%),
+                  url('img/banner.jpg') center/cover no-repeat;
+      min-height: 380px;
+      display: flex;
+      align-items: flex-end;
+      padding: 40px 6%;
+      border-bottom: 1px solid var(--border-blue);
+    }
+
+    .hero-content {
+      max-width: 800px;
+      z-index: 2;
+    }
+
+    .hero-title-box h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 3.8rem;
+      font-weight: 900;
+      line-height: 1;
+      font-style: italic;
+      color: #fff;
+      text-shadow: 4px 4px 0px #000, 0 0 25px rgba(0, 230, 118, 0.5);
+    }
+
+    .hero-title-box h2 span { color: var(--accent-yellow); }
+
+    .hero-slogan {
+      margin: 12px 0 20px 0;
+      border-left: 4px solid var(--accent-green);
+      padding-left: 14px;
+    }
+
+    .hero-slogan p {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn-green {
+      background: linear-gradient(135deg, #00e676 0%, #00b359 100%);
+      color: #071220;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 900;
+      padding: 13px 26px;
+      border-radius: 25px;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(0, 230, 118, 0.4);
+      transition: all 0.2s;
+    }
+
+    .btn-green:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 230, 118, 0.6);
+    }
+
+    .btn-yellow {
+      background: transparent;
+      color: var(--accent-yellow);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 900;
+      padding: 12px 24px;
+      border-radius: 25px;
+      border: 2px solid var(--accent-yellow);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .btn-yellow:hover {
+      background: var(--accent-yellow);
+      color: #071220;
+    }
+
+    /* 5. CONTENEDOR GENERAL DE SECCIONES */
+    .container {
+      max-width: 1320px;
+      margin: 40px auto;
+      padding: 0 20px;
+      width: 100%;
+    }
+
+    .page-section {
+      margin-bottom: 70px;
+      padding-top: 15px;
+    }
+
+    .section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      border-left: 4px solid var(--accent-green);
+      padding-left: 12px;
+      text-transform: uppercase;
+    }
+
+    /* TARJETAS DE INICIO */
+    .home-grid {
+      display: grid;
+      grid-template-columns: 2.3fr 1fr;
+      gap: 28px;
+    }
+
+    .news-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    .expandable-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-blue);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+    }
+
+    .card-top {
+      display: grid;
+      grid-template-columns: 230px 1fr;
+      gap: 18px;
+    }
+
+    .card-thumb {
+      position: relative;
+      height: 100%;
+      min-height: 180px;
+      background: #050d17;
+    }
+
+    .card-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .score-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(7, 18, 32, 0.9);
+      color: var(--accent-green);
+      font-weight: 800;
+      font-size: 0.8rem;
+      padding: 4px 10px;
+      border-radius: 6px;
+      border-left: 3px solid var(--accent-green);
+    }
+
+    .card-preview {
+      padding: 18px 20px 18px 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .match-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .match-brief {
+      font-size: 0.88rem;
+      color: var(--text-gray);
+      margin-bottom: 14px;
+    }
+
+    .card-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-toggle-news {
+      background: var(--primary-blue);
+      color: var(--accent-green);
+      border: 1px solid var(--border-blue);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .btn-toggle-news:hover {
+      background: var(--accent-green);
+      color: #071220;
+    }
+
+    .dropdown-content {
+      display: none;
+      padding: 24px;
+      background: #091729;
+      border-top: 1px solid var(--border-blue);
+    }
+
+    .stats-table {
+      width: 100%;
+      margin: 15px 0;
+      font-size: 0.88rem;
+      border-collapse: collapse;
+    }
+
+    .stats-table td {
+      padding: 8px 12px;
+      border-bottom: 1px solid #142a45;
+    }
+
+    .stats-table tr:last-child td { border-bottom: none; }
+    .stats-label { color: var(--text-gray); text-align: center; font-weight: 600; }
+    .stats-val { font-weight: 800; color: #fff; }
+
+    /* FILA DE CUOTAS */
+    .odds-row {
+      display: flex;
+      gap: 8px;
+      background: #06111f;
+      padding: 8px;
+      border-radius: 8px;
+      border: 1px solid var(--border-blue);
+    }
+
+    .odd-box {
+      flex: 1;
+      background: var(--primary-blue);
+      border: 1px solid var(--border-blue);
+      border-radius: 6px;
+      padding: 6px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .odd-box:hover {
+      background: var(--accent-green);
+      color: #071220;
+    }
+
+    .odd-box:hover .team-name, .odd-box:hover .odd-number {
+      color: #071220;
+    }
+
+    .team-name {
+      display: block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--text-gray);
+    }
+
+    .odd-number {
+      font-size: 0.95rem;
+      font-weight: 900;
+      color: var(--accent-green);
+    }
+
+    /* AGENDA LATERAL */
+    .sidebar-panel {
+      background: var(--bg-card);
+      border-radius: 14px;
+      padding: 22px;
+      border: 1px solid var(--border-blue);
+      height: fit-content;
+    }
+
+    .event-item {
+      display: flex;
+      gap: 15px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border-blue);
+    }
+
+    .event-item:last-child { border-bottom: none; }
+
+    .date-badge {
+      background: linear-gradient(180deg, #122b4d, #071526);
+      border: 1px solid var(--accent-green);
+      border-radius: 8px;
+      min-width: 55px;
+      height: 58px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .date-badge .m { font-size: 0.65rem; font-weight: 800; color: var(--accent-green); }
+    .date-badge .d { font-size: 1.3rem; font-weight: 900; font-family: 'Montserrat', sans-serif; }
+
+    /* RESÚMENES ULTRA DETALLADOS */
+    .recaps-detail-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 35px;
+    }
+
+    .recap-card-ultra {
+      background: var(--bg-card);
+      border: 1px solid var(--border-blue);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+
+    .recap-header-banner {
+      position: relative;
+      height: 240px;
+      background: #040c16;
+      display: flex;
+      align-items: flex-end;
+      padding: 25px;
+      overflow: hidden;
+    }
+
+    .recap-header-banner img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.45;
+    }
+
+    .recap-header-overlay {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .match-big-score {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      background: rgba(7, 18, 32, 0.88);
+      backdrop-filter: blur(8px);
+      padding: 12px 24px;
+      border-radius: 12px;
+      border: 2px solid var(--accent-green);
+    }
+
+    .big-team {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: #fff;
+    }
+
+    .big-score-digits {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--accent-yellow);
+      background: #050e18;
+      padding: 4px 16px;
+      border-radius: 8px;
+    }
+
+    .recap-body-content {
+      padding: 28px;
+      display: grid;
+      grid-template-columns: 1.8fr 1fr;
+      gap: 30px;
+    }
+
+    .timeline-list {
+      list-style: none;
+      position: relative;
+      padding-left: 20px;
+      border-left: 2px solid var(--border-blue);
+      margin: 15px 0;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 14px;
+      font-size: 0.9rem;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -26px;
+      top: 4px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent-green);
+      box-shadow: 0 0 8px var(--accent-green);
+    }
+
+    .timeline-min {
+      font-weight: 800;
+      color: var(--accent-green);
+      margin-right: 6px;
+    }
+
+    .mvp-box {
+      background: #091729;
+      border: 1px solid var(--border-blue);
+      border-radius: 10px;
+      padding: 16px;
+      margin-top: 15px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .mvp-badge {
+      background: var(--accent-yellow);
+      color: #071220;
+      font-weight: 900;
+      font-size: 0.75rem;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+
+    /* PRONÓSTICOS Y CUOTAS */
+    .odds-detailed-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 25px;
+    }
+
+    .odd-card-rich {
+      background: var(--bg-card);
+      border: 1px solid var(--border-blue);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    }
+
+    .odd-match-pic {
+      position: relative;
+      height: 170px;
+      background: #050d17;
+    }
+
+    .odd-match-pic img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .odd-match-league {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(7, 18, 32, 0.9);
+      color: var(--accent-yellow);
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      border-left: 3px solid var(--accent-yellow);
+    }
+
+    .odd-rich-body { padding: 22px; }
+
+    .prob-bar-container { margin: 15px 0; }
+
+    .prob-bar-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--text-gray);
+      margin-bottom: 5px;
+      font-weight: 700;
+    }
+
+    .prob-bar {
+      height: 8px;
+      border-radius: 4px;
+      background: #071526;
+      display: flex;
+      overflow: hidden;
+    }
+
+    .prob-segment-1 { background: var(--accent-green); }
+    .prob-segment-x { background: var(--accent-yellow); }
+    .prob-segment-2 { background: #3b82f6; }
+
+    .pick-recommendation {
+      background: rgba(0, 230, 118, 0.08);
+      border: 1px dashed var(--accent-green);
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin: 16px 0;
+      font-size: 0.85rem;
+    }
+
+    .sub-market-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    /* BLOG DEPORTIVO */
+    .blog-epic-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+
+    .blog-article-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-blue);
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .blog-pic-header {
+      position: relative;
+      height: 200px;
+      background: #06101c;
+    }
+
+    .blog-pic-header img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .blog-card-body {
+      padding: 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .blog-meta-tags {
+      display: flex;
+      gap: 12px;
+      font-size: 0.78rem;
+      color: var(--text-gray);
+      margin-bottom: 10px;
+    }
+
+    .narrative-text {
+      color: #cbd5e1;
+      font-size: 0.92rem;
+      line-height: 1.65;
+      margin: 14px 0;
+    }
+
+    /* CONTACTO */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 30px;
+    }
+
+    .service-box {
+      background: linear-gradient(135deg, #0d223c 0%, #081628 100%);
+      border: 1px solid var(--accent-green);
+      border-radius: 14px;
+      padding: 30px;
+    }
+
+    .service-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 230, 118, 0.1);
+      border: 1px solid var(--accent-green);
+      color: var(--accent-green);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      margin-bottom: 15px;
+    }
+
+    .service-list {
+      list-style: none;
+      margin: 20px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .service-list li {
+      display: flex;
+      gap: 12px;
+      font-size: 0.92rem;
+      color: var(--text-gray);
+    }
+
+    .service-list li i {
+      color: var(--accent-green);
+      font-size: 1.1rem;
+      margin-top: 3px;
+    }
+
+    .direct-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-blue);
+      border-radius: 14px;
+      padding: 30px;
+    }
+
+    .contact-item-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 14px;
+      background: #071526;
+      border: 1px solid var(--border-blue);
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    .contact-item-row i {
+      font-size: 1.4rem;
+      color: var(--accent-green);
+    }
+
+    .btn-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      background: #25d366;
+      color: #fff;
+      text-decoration: none;
+      padding: 14px;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 1rem;
+      margin-top: 10px;
+      transition: background 0.2s;
+    }
+
+    .btn-whatsapp:hover { background: #1eb954; }
+
+    /* BOLETO FLOTANTE */
+    #bet-slip {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      width: 320px;
+      background: #0d223c;
+      border-radius: 12px;
+      border: 2px solid var(--accent-green);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      display: none;
+      z-index: 2000;
+      overflow: hidden;
+    }
+
+    .slip-top {
+      background: #06111f;
+      color: #fff;
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 800;
+      font-size: 0.9rem;
+      border-bottom: 1px solid var(--border-blue);
+    }
+
+    .slip-content { padding: 16px; }
+
+    .slip-input {
+      width: 100%;
+      padding: 8px;
+      margin: 10px 0;
+      background: #071526;
+      border: 1px solid var(--border-blue);
+      color: #fff;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    /* VENTANA MODAL */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(5px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 3000;
+      padding: 20px;
+    }
+
+    .modal-box {
+      background: #0d223c;
+      border: 2px solid var(--accent-green);
+      border-radius: 16px;
+      max-width: 500px;
+      width: 100%;
+      padding: 30px;
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 18px;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .modal-form-input {
+      width: 100%;
+      padding: 10px 14px;
+      margin: 10px 0;
+      background: #071526;
+      border: 1px solid var(--border-blue);
+      color: #fff;
+      border-radius: 8px;
+      outline: none;
+    }
+
+    footer {
+      background: #040a13;
+      color: var(--text-gray);
+      text-align: center;
+      padding: 24px;
+      font-size: 0.85rem;
+      border-top: 2px solid var(--border-blue);
+      margin-top: 40px;
+    }
+
+    footer span { color: var(--accent-green); font-weight: 700; }
+
+    @media (max-width: 900px) {
+      .home-grid, .contact-grid, .card-top, .recap-body-content, .blog-epic-grid, .odds-detailed-grid {
+        grid-template-columns: 1fr;
+      }
+      .header, .nav-bar { flex-direction: column; gap: 12px; padding: 12px; }
+      .nav-tabs { flex-wrap: wrap; justify-content: center; }
+      .hero-title-box h2 { font-size: 2.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TICKER -->
+  <div class="top-ticker">
+    <div class="ticker-tag"><i class="fa-solid fa-bolt"></i> En Vivo GOALBET</div>
+    <div class="ticker-scroll">
+      ⚡ GOLEADA HISTÓRICA: INGLATERRA 7-0 CROACIA &bull; AGÓNICO EMPATE: PERÚ 1-1 MÉXICO EN EL MINUTO 88 &bull; REMONTADA NIPONA: JAPÓN 2-1 VENEZUELA EN EL 90+2' &bull; CLÁSICO MUNDIAL: ARGENTINA 2-0 BRASIL &bull; CUOTAS ACTUALIZADAS EN GOALBET
+    </div>
+  </div>
+
+  <!-- ENCABEZADO -->
+  <header class="header">
+    <div class="brand-box">
+      <h1>GOAL<span>BET</span> <i class="fa-solid fa-futbol" style="color: var(--accent-green);"></i></h1>
+      <p>Tu portal oficial de análisis y apuestas deportivas</p>
+    </div>
+    <div class="contact-fast">
+      <i class="fa-solid fa-shield-halved"></i>
+      <div>
+        <span class="phone">930 956 318</span>
+        <span class="mail">jhobcoaquiralaura@gmail.com</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- MENÚ DE NAVEGACIÓN TOTALMENTE OPERATIVO -->
+  <nav class="nav-bar">
+    <div class="nav-tabs">
+      <a href="#inicio" class="nav-link-btn"><i class="fa-solid fa-house"></i> Inicio</a>
+      <a href="#resumenes" class="nav-link-btn"><i class="fa-solid fa-video"></i> Resúmenes Detallados</a>
+      <a href="#pronosticos" class="nav-link-btn"><i class="fa-solid fa-chart-line"></i> Pronósticos y Cuotas</a>
+      <a href="#blog" class="nav-link-btn"><i class="fa-solid fa-newspaper"></i> Blog y Partidos Narrados</a>
+      <a href="#contacto" class="nav-link-btn"><i class="fa-solid fa-headset"></i> Soporte y Contacto</a>
+    </div>
+
+    <div class="nav-search">
+      <input type="text" id="searchInput" oninput="filterArticles()" placeholder="Buscar equipo o partido...">
+      <i class="fa-solid fa-magnifying-glass" style="color: var(--accent-green);"></i>
+    </div>
+  </nav>
+
+  <!-- BANNER HERO -->
+  <section class="hero-banner">
+    <div class="hero-content">
+      <div class="hero-title-box">
+        <h2>GOAL<span>BET</span></h2>
+      </div>
+      <div class="hero-slogan">
+        <p>Tus pronósticos deportivos</p>
+        <p style="color: var(--accent-green);">Vive la emoción del fútbol al máximo</p>
+      </div>
+      <div class="hero-btns">
+        <button class="btn-green" onclick="abrirModalRegistro()">
+          REGÍSTRATE AHORA <i class="fa-solid fa-chevron-right"></i>
+        </button>
+        <a href="#resumenes" class="btn-yellow">
+          VER RESÚMENES COMPLETOS <i class="fa-regular fa-circle-play"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTENEDOR CENTRAL -->
+  <div class="container">
+
+    <!-- ==================== SECCIÓN 1: INICIO ==================== -->
+    <section id="inicio" class="page-section">
+      <div class="section-title"><i class="fa-solid fa-fire"></i> Destacados con Noticias Desplegables</div>
+      
+      <div class="home-grid">
+        <div class="news-stack">
+
+          <!-- INGLATERRA 7-0 -->
+          <article class="expandable-card article-item">
+            <div class="card-top">
+              <div class="card-thumb">
+                <span class="score-badge">FINAL: 7 - 0</span>
+                <img src="img/inglaterra_croacia.jpg" onerror="this.src='https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=700&q=80'" alt="Inglaterra vs Croacia">
+              </div>
+              <div class="card-preview">
+                <div>
+                  <h3 class="match-title">🏴󠁧󠁢󠁥󠁮󠁧󠁿 ¡APABULLANTE GOLEADA! INGLATERRA 7 - 0 CROACIA 🇭🇷</h3>
+                  <p class="match-brief">Exhibición histórica en Wembley. La ofensiva inglesa desmanteló el cerrojo croata con 4 goles en el segundo tiempo.</p>
+                </div>
+                <div class="card-actions">
+                  <div class="odds-row" style="flex:1;">
+                    <div class="odd-box" onclick="marcarCuota('Inglaterra (1)', 1.45)"><span class="team-name">ING</span><span class="odd-number">1.45</span></div>
+                    <div class="odd-box" onclick="marcarCuota('Empate (X)', 4.80)"><span class="team-name">EMP</span><span class="odd-number">4.80</span></div>
+                    <div class="odd-box" onclick="marcarCuota('Croacia (2)', 7.20)"><span class="team-name">CRO</span><span class="odd-number">7.20</span></div>
+                  </div>
+                  <button class="btn-toggle-news" onclick="alternarNoticia('home-inglaterra')">
+                    <i class="fa-solid fa-angle-down"></i> Ver Crónica
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div id="home-inglaterra" class="dropdown-content">
+              <h4 style="color: var(--accent-green); margin-bottom: 8px;"><i class="fa-solid fa-circle-info"></i> Resumen Rápido:</h4>
+              <p style="color: var(--text-gray); font-size: 0.9rem;">Kane (3), Saka (2), Foden (1) y Bellingham (1) sellaron una goleada sin precedentes. Croacia no pudo generar un solo remate franco al arco durante los 90 minutos.</p>
+              <table class="stats-table">
+                <tr><td class="stats-val">72%</td><td class="stats-label">Posesión</td><td class="stats-val" style="text-align:right;">28%</td></tr>
+                <tr><td class="stats-val">18 (12)</td><td class="stats-label">Tiros (Al arco)</td><td class="stats-val" style="text-align:right;">3 (1)</td></tr>
+              </table>
+            </div>
+          </article>
+
+          <!-- PERÚ 1-1 MÉXICO -->
+          <article class="expandable-card article-item">
+            <div class="card-top">
+              <div class="card-thumb">
+                <span class="score-badge">FINAL: 1 - 1</span>
+                <img src="img/peru_mexico.jpg" onerror="this.src='https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=700&q=80'" alt="Perú vs México">
+              </div>
+              <div class="card-preview">
+                <div>
+                  <h3 class="match-title">🇵🇪 PERÚ 1 - 1 MÉXICO 🇲🇽: EMPATE AGÓNICO AL MINUTO 88</h3>
+                  <p class="match-brief">La Blanquirroja rescató la igualdad en los suspiros finales tras un testazo impecable en tiro de esquina.</p>
+                </div>
+                <div class="card-actions">
+                  <div class="odds-row" style="flex:1;">
+                    <div class="odd-box" onclick="marcarCuota('Perú (1)', 2.65)"><span class="team-name">PER</span><span class="odd-number">2.65</span></div>
+                    <div class="odd-box" onclick="marcarCuota('Empate (X)', 3.10)"><span class="team-name">EMP</span><span class="odd-number">3.10</span></div>
+                    <div class="odd-box" onclick="marcarCuota('México (2)', 2.80)"><span class="team-name">MÉX</span><span class="odd-number">2.80</span></div>
+                  </div>
+                  <button class="btn-toggle-news" onclick="alternarNoticia('home-peru')">
+                    <i class="fa-solid fa-angle-down"></i> Ver Crónica
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div id="home-peru" class="dropdown-content">
+              <h4 style="color: var(--accent-green); margin-bottom: 8px;"><i class="fa-solid fa-circle-info"></i> Resumen Rápido:</h4>
+              <p style="color: var(--text-gray); font-size: 0.9rem;">México abrió la cuenta al 34' aprovechando un balón suelto. Perú adelantó líneas en el complemento y puso tablas definitivas al 88' con gran empuje colectivo.</p>
+              <table class="stats-table">
+                <tr><td class="stats-val">49%</td><td class="stats-label">Posesión</td><td class="stats-val" style="text-align:right;">51%</td></tr>
+                <tr><td class="stats-val">11 (5)</td><td class="stats-label">Tiros (Al arco)</td><td class="stats-val" style="text-align:right;">10 (4)</td></tr>
+              </table>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- AGENDA LATERAL -->
+        <aside class="sidebar-panel">
+          <div class="section-title" style="font-size: 1.1rem; margin-bottom: 15px;"><i class="fa-regular fa-calendar-check"></i> Próximos Encuentros</div>
+
+          <div class="event-item">
+            <div class="date-badge"><span class="m">SEP</span><span class="d">28</span></div>
+            <div>
+              <h4 style="font-size: 0.92rem; font-weight: 700;">Japón vs. Venezuela (Vuelta)</h4>
+              <p style="font-size: 0.78rem; color: var(--text-gray);">Amistoso Internacional &bull; 19:30 hrs</p>
+            </div>
+          </div>
+
+          <div class="event-item">
+            <div class="date-badge"><span class="m">AGO</span><span class="d">27</span></div>
+            <div>
+              <h4 style="font-size: 0.92rem; font-weight: 700;">¡Perú vs. Canadá! 🇵🇪🇨🇦</h4>
+              <p style="font-size: 0.78rem; color: var(--text-gray);">Fecha FIFA &bull; 20:00 hrs</p>
+            </div>
+          </div>
+
+          <div class="event-item">
+            <div class="date-badge"><span class="m">OCT</span><span class="d">12</span></div>
+            <div>
+              <h4 style="font-size: 0.92rem; font-weight: 700;">Inglaterra vs. España</h4>
+              <p style="font-size: 0.78rem; color: var(--text-gray);">UEFA Nations League &bull; 21:00 hrs</p>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+
+    <!-- ==================== SECCIÓN 2: RESÚMENES ==================== -->
+    <section id="resumenes" class="page-section">
+      <div class="section-title"><i class="fa-solid fa-video"></i> Resúmenes Detallados de Partidos Recientes</div>
+      
+      <div class="recaps-detail-grid">
+
+        <!-- DETALLE 1: INGLATERRA 7-0 -->
+        <article class="recap-card-ultra">
+          <div class="recap-header-banner">
+            <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=1200&q=80" alt="Inglaterra vs Croacia">
+            <div class="recap-header-overlay">
+              <div>
+                <span class="score-badge" style="position:static; margin-bottom:8px; display:inline-block;">UEFA NATIONS LEAGUE &bull; WEMBLEY STADIUM</span>
+                <div class="match-big-score">
+                  <span class="big-team">🏴󠁧󠁢󠁥󠁮󠁧󠁿 INGLATERRA</span>
+                  <span class="big-score-digits">7 - 0</span>
+                  <span class="big-team">CROACIA 🇭🇷</span>
+                </div>
+              </div>
+              <button class="btn-green" onclick="abrirModalVideo('Inglaterra 7 - 0 Croacia')">
+                <i class="fa-solid fa-play"></i> Ver Goles en HD
+              </button>
+            </div>
+          </div>
+
+          <div class="recap-body-content">
+            <div>
+              <h3 style="font-family:'Montserrat', sans-serif; font-size:1.3rem; margin-bottom:12px; color:var(--accent-yellow);">
+                Cátedra Británica: La Mayor Goleada Registrada en Wembley
+              </h3>
+              <p style="color:var(--text-gray); line-height:1.65; margin-bottom:18px;">
+                Inglaterra no tuvo piedad ante una Croacia irreconocible en su esquema defensivo. Desde el primer cuarto de hora, la velocidad de los extremos ingleses pulverizó las bandas croatas, generando una fiesta de goles para deleite de más de 85,000 espectadores.
+              </p>
+
+              <h4 style="color:var(--accent-green); font-size:0.95rem; text-transform:uppercase;"><i class="fa-solid fa-futbol"></i> Minuto a Minuto de los Goles:</h4>
+              <ul class="timeline-list">
+                <li class="timeline-item"><span class="timeline-min">14'</span> <strong>Gol de Harry Kane:</strong> Remate cruzado tras filtración milimétrica de Bellingham (1-0).</li>
+                <li class="timeline-item"><span class="timeline-min">28'</span> <strong>Gol de Bukayo Saka:</strong> Zurdazo al ángulo tras superar la marca del lateral (2-0).</li>
+                <li class="timeline-item"><span class="timeline-min">42'</span> <strong>Gol de Harry Kane:</strong> Penal cobrado con frialdad al palo izquierdo (3-0).</li>
+                <li class="timeline-item"><span class="timeline-min">55'</span> <strong>Gol de Phil Foden:</strong> Toque colocado rasante tras pared en el área chica (4-0).</li>
+                <li class="timeline-item"><span class="timeline-min">68'</span> <strong>Gol de Bukayo Saka:</strong> Cabezazo potente al segundo palo (5-0).</li>
+                <li class="timeline-item"><span class="timeline-min">79'</span> <strong>Gol de Harry Kane (Hat-trick):</strong> Definición de volea en el punto penal (6-0).</li>
+                <li class="timeline-item"><span class="timeline-min">87'</span> <strong>Gol de Declan Rice:</strong> Bombazo de larga distancia a 110 km/h (7-0).</li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 style="color:#fff; font-size:1rem; margin-bottom:12px;"><i class="fa-solid fa-chart-column"></i> Estadísticas del Duelo</h4>
+              <table class="stats-table">
+                <tr><td class="stats-val">71%</td><td class="stats-label">Posesión</td><td class="stats-val" style="text-align:right;">29%</td></tr>
+                <tr><td class="stats-val">22</td><td class="stats-label">Tiros Totales</td><td class="stats-val" style="text-align:right;">3</td></tr>
+                <tr><td class="stats-val">14</td><td class="stats-label">Tiros al Arco</td><td class="stats-val" style="text-align:right;">1</td></tr>
+                <tr><td class="stats-val">9</td><td class="stats-label">Córners</td><td class="stats-val" style="text-align:right;">2</td></tr>
+                <tr><td class="stats-val">4</td><td class="stats-label">Faltas</td><td class="stats-val" style="text-align:right;">13</td></tr>
+              </table>
+
+              <div class="mvp-box">
+                <i class="fa-solid fa-trophy" style="font-size:1.8rem; color:var(--accent-yellow);"></i>
+                <div>
+                  <span class="mvp-badge">FIGURA DEL PARTIDO</span>
+                  <p style="font-weight:800; font-size:1rem; color:#fff;">Harry Kane (Inglaterra)</p>
+                  <p style="font-size:0.75rem; color:var(--text-gray);">3 Goles &bull; 1 Asistencia &bull; Calificación 10/10</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- DETALLE 2: PERÚ 1-1 -->
+        <article class="recap-card-ultra">
+          <div class="recap-header-banner">
+            <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=1200&q=80" alt="Perú vs México">
+            <div class="recap-header-overlay">
+              <div>
+                <span class="score-badge" style="position:static; margin-bottom:8px; display:inline-block;">AMISTOSO FECHA FIFA &bull; ROSE BOWL</span>
+                <div class="match-big-score">
+                  <span class="big-team">🇵🇪 PERÚ</span>
+                  <span class="big-score-digits">1 - 1</span>
+                  <span class="big-team">MÉXICO 🇲🇽</span>
+                </div>
+              </div>
+              <button class="btn-green" onclick="abrirModalVideo('Perú 1 - 1 México')">
+                <i class="fa-solid fa-play"></i> Ver Goles en HD
+              </button>
+            </div>
+          </div>
+
+          <div class="recap-body-content">
+            <div>
+              <h3 style="font-family:'Montserrat', sans-serif; font-size:1.3rem; margin-bottom:12px; color:var(--accent-yellow);">
+                Garra y Corazón: El Cabezazo Salvador de la Blanquirroja en el 88'
+              </h3>
+              <p style="color:var(--text-gray); line-height:1.65; margin-bottom:18px;">
+                Un cotejo no apto para cardíacos. México se plantó con jerarquía en la primera etapa, complicando las salidas de Perú. Sin embargo, en el tramo final, los cambios ofensivos le dieron vitalidad a la selección incaica, sellando un empate con sabor a triunfo.
+              </p>
+
+              <h4 style="color:var(--accent-green); font-size:0.95rem; text-transform:uppercase;"><i class="fa-solid fa-futbol"></i> Línea de Tiempo del Partido:</h4>
+              <ul class="timeline-list">
+                <li class="timeline-item"><span class="timeline-min">34'</span> <strong>Gol de Santiago Giménez (México):</strong> Cazó un rebote en el área chica y la mandó a guardar (0-1).</li>
+                <li class="timeline-item"><span class="timeline-min">62'</span> <strong>Tarjeta Amarilla:</strong> Falta táctica de Renato Tapia para cortar un contragolpe peligroso.</li>
+                <li class="timeline-item"><span class="timeline-min">78'</span> <strong>Cambio Ofensivo:</strong> Ingreso de doble nueve en Perú para buscar los balones aéreos.</li>
+                <li class="timeline-item"><span class="timeline-min">88'</span> <strong>¡GOL AGÓNICO DE PERÚ!:</strong> Centro venenoso al corazón del área que conecta un testazo furioso al palo derecho (1-1).</li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 style="color:#fff; font-size:1rem; margin-bottom:12px;"><i class="fa-solid fa-chart-column"></i> Estadísticas del Duelo</h4>
+              <table class="stats-table">
+                <tr><td class="stats-val">49%</td><td class="stats-label">Posesión</td><td class="stats-val" style="text-align:right;">51%</td></tr>
+                <tr><td class="stats-val">11</td><td class="stats-label">Tiros Totales</td><td class="stats-val" style="text-align:right;">10</td></tr>
+                <tr><td class="stats-val">5</td><td class="stats-label">Tiros al Arco</td><td class="stats-val" style="text-align:right;">4</td></tr>
+                <tr><td class="stats-val">16</td><td class="stats-label">Faltas Totales</td><td class="stats-val" style="text-align:right;">14</td></tr>
+              </table>
+
+              <div class="mvp-box">
+                <i class="fa-solid fa-trophy" style="font-size:1.8rem; color:var(--accent-yellow);"></i>
+                <div>
+                  <span class="mvp-badge">FIGURA DEL PARTIDO</span>
+                  <p style="font-weight:800; font-size:1rem; color:#fff;">Pedro Gallese (Perú)</p>
+                  <p style="font-size:0.75rem; color:var(--text-gray);">4 Atajadas Clave en el 1er Tiempo &bull; Calificación 8.8/10</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+
+    <!-- ==================== SECCIÓN 3: PRONÓSTICOS ==================== -->
+    <section id="pronosticos" class="page-section">
+      <div class="section-title"><i class="fa-solid fa-chart-line"></i> Centro de Pronósticos y Cuotas Recomendadas</div>
+      <p style="color:var(--text-gray); margin-bottom:25px;">
+        Haz clic en cualquier cuota para abrir el <strong>Boleto GOALBET</strong> y simular la ganancia en soles.
+      </p>
+
+      <div class="odds-detailed-grid">
+
+        <!-- PRONÓSTICO 1 -->
+        <article class="odd-card-rich">
+          <div class="odd-match-pic">
+            <span class="odd-match-league">AMISTOSO INTERNACIONAL &bull; 27 AGO</span>
+            <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=700&q=80" alt="Perú vs Canadá">
+          </div>
+          <div class="odd-rich-body">
+            <h3 style="font-family:'Montserrat', sans-serif; font-size:1.15rem; color:#fff; margin-bottom:4px;">🇵🇪 Perú vs. Canadá 🇨🇦</h3>
+            <p style="font-size:0.8rem; color:var(--text-gray);">Estadio Nacional de Lima &bull; 20:00 hrs</p>
+
+            <div class="prob-bar-container">
+              <div class="prob-bar-labels">
+                <span>Perú 46%</span><span>Empate 29%</span><span>Canadá 25%</span>
+              </div>
+              <div class="prob-bar">
+                <div class="prob-segment-1" style="width: 46%;"></div>
+                <div class="prob-segment-x" style="width: 29%;"></div>
+                <div class="prob-segment-2" style="width: 25%;"></div>
+              </div>
+            </div>
+
+            <div class="pick-recommendation">
+              <strong style="color:var(--accent-green);"><i class="fa-solid fa-bullseye"></i> Pick Recomendado GOALBET:</strong>  
+              <p style="color:#fff; margin-top:3px;">Perú o Empate (Doble Oportunidad 1X) + Menos de 3.5 Goles.</p>
+            </div>
+
+            <p style="font-size:0.75rem; text-transform:uppercase; color:var(--text-gray); margin-bottom:6px; font-weight:700;">Ganador del Encuentro (1X2):</p>
+            <div class="odds-row">
+              <div class="odd-box" onclick="marcarCuota('Perú (vs Canadá)', 2.45)"><span class="team-name">1 (PER)</span><span class="odd-number">2.45</span></div>
+              <div class="odd-box" onclick="marcarCuota('Empate (Perú vs Canadá)', 3.20)"><span class="team-name">X (EMP)</span><span class="odd-number">3.20</span></div>
+              <div class="odd-box" onclick="marcarCuota('Canadá (vs Perú)', 2.95)"><span class="team-name">2 (CAN)</span><span class="odd-number">2.95</span></div>
+            </div>
+
+            <div class="sub-market-grid">
+              <div class="odd-box" onclick="marcarCuota('Más de 2.5 Goles (Perú vs Canadá)', 2.05)">
+                <span class="team-name">+2.5 GOLES</span><span class="odd-number">2.05</span>
+              </div>
+              <div class="odd-box" onclick="marcarCuota('Ambos Anotan: SÍ (Perú vs Canadá)', 1.88)">
+                <span class="team-name">AMBOS ANOTAN</span><span class="odd-number">1.88</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- PRONÓSTICO 2 -->
+        <article class="odd-card-rich">
+          <div class="odd-match-pic">
+            <span class="odd-match-league">UEFA NATIONS LEAGUE &bull; 12 OCT</span>
+            <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=700&q=80" alt="Inglaterra vs España">
+          </div>
+          <div class="odd-rich-body">
+            <h3 style="font-family:'Montserrat', sans-serif; font-size:1.15rem; color:#fff; margin-bottom:4px;">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra vs. España 🇪🇸</h3>
+            <p style="font-size:0.8rem; color:var(--text-gray);">Wembley Stadium &bull; 21:00 hrs</p>
+
+            <div class="prob-bar-container">
+              <div class="prob-bar-labels">
+                <span>Inglaterra 41%</span><span>Empate 31%</span><span>España 28%</span>
+              </div>
+              <div class="prob-bar">
+                <div class="prob-segment-1" style="width: 41%;"></div>
+                <div class="prob-segment-x" style="width: 31%;"></div>
+                <div class="prob-segment-2" style="width: 28%;"></div>
+              </div>
+            </div>
+
+            <div class="pick-recommendation">
+              <strong style="color:var(--accent-green);"><i class="fa-solid fa-bullseye"></i> Pick Recomendado GOALBET:</strong>  
+              <p style="color:#fff; margin-top:3px;">Ambos Equipos Marcan: SÍ (Cuota 1.78) — Alta efectividad ofensiva.</p>
+            </div>
+
+            <p style="font-size:0.75rem; text-transform:uppercase; color:var(--text-gray); margin-bottom:6px; font-weight:700;">Ganador del Encuentro (1X2):</p>
+            <div class="odds-row">
+              <div class="odd-box" onclick="marcarCuota('Inglaterra (vs España)', 2.30)"><span class="team-name">1 (ING)</span><span class="odd-number">2.30</span></div>
+              <div class="odd-box" onclick="marcarCuota('Empate (Inglaterra vs España)', 3.35)"><span class="team-name">X (EMP)</span><span class="odd-number">3.35</span></div>
+              <div class="odd-box" onclick="marcarCuota('España (vs Inglaterra)', 3.10)"><span class="team-name">2 (ESP)</span><span class="odd-number">3.10</span></div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+
+    <!-- ==================== SECCIÓN 4: BLOG ==================== -->
+    <section id="blog" class="page-section">
+      <div class="section-title"><i class="fa-solid fa-newspaper"></i> Blog GOALBET: Crónicas y Partidos Narrados</div>
+      
+      <div class="blog-epic-grid">
+
+        <!-- CRÓNICA 1 -->
+        <article class="blog-article-card">
+          <div class="blog-pic-header">
+            <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=800&q=80" alt="Inglaterra narración">
+          </div>
+          <div class="blog-card-body">
+            <div>
+              <div class="blog-meta-tags">
+                <span><i class="fa-solid fa-user-pen"></i> Por Redacción GOALBET</span>
+                <span><i class="fa-solid fa-clock"></i> Lectura: 5 min</span>
+              </div>
+              <h3 style="font-family:'Montserrat', sans-serif; font-size:1.25rem; color:#fff; line-height:1.35;">
+                La Noche en que Wembley Enmudeció a Zagreb: El Relato Íntimo del 7-0
+              </h3>
+              <p class="narrative-text">
+                <em>"El rugido de las gradas ensordecía. Apenas rodó el balón en la fría noche londinense, se sintió que Croacia estaba atrapada en un vendaval. Jude Bellingham manejaba los hilos con la soltura de un veterano de mil batallas, mientras Harry Kane olfateaba la sangre de los centrales balcánicos..."</em>
+              </p>
+            </div>
+            <button class="btn-green" style="padding:10px 18px; font-size:0.85rem;" onclick="abrirModalArticulo('La Noche en que Wembley Enmudeció a Zagreb (7-0)')">
+              Leer Crónica Completa <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </article>
+
+        <!-- CRÓNICA 2 -->
+        <article class="blog-article-card">
+          <div class="blog-pic-header">
+            <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=800&q=80" alt="Perú narración">
+          </div>
+          <div class="blog-card-body">
+            <div>
+              <div class="blog-meta-tags">
+                <span><i class="fa-solid fa-user-pen"></i> Por Redacción GOALBET</span>
+                <span><i class="fa-solid fa-clock"></i> Lectura: 4 min</span>
+              </div>
+              <h3 style="font-family:'Montserrat', sans-serif; font-size:1.25rem; color:#fff; line-height:1.35;">
+                El Rugido Blanquirrojo en el Desierto: Cómo se Forjó el 1-1 ante México
+              </h3>
+              <p class="narrative-text">
+                <em>"Corrían 87 minutos de reloj implacable. En el banquillo peruano la tensión cortaba el aire. México se replegaba celebrando un triunfo por la mínima. Pero vino el córner: la pelota voló describiendo una comba perfecta y emergió el cabezazo salvador al 88'..."</em>
+              </p>
+            </div>
+            <button class="btn-green" style="padding:10px 18px; font-size:0.85rem;" onclick="abrirModalArticulo('El Rugido Blanquirrojo en el Desierto: Perú 1-1 México')">
+              Leer Crónica Completa <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+
+<!-- ==================== SECCIÓN 5: CONTACTO ==================== -->
+<section id="contacto" class="page-section">
+
+  <div class="section-title">
+    <i class="fa-solid fa-headset"></i>
+    Canales de Atención y Compromiso de Buen Servicio
+  </div>
+
+  <div class="contact-grid">
+
+    <div class="service-box">
+      <div class="service-badge">
+        <i class="fa-solid fa-shield-halved"></i>
+        Garantía y Confianza GOALBET
+      </div>
+
+      <h3 style="font-family:'Montserrat', sans-serif; font-size:1.4rem; color:#fff; margin-bottom:12px;">
+        Nuestro Compromiso con la Excelencia en el Servicio
+      </h3>
+
+      <p style="color:var(--text-gray); line-height:1.6; font-size:0.95rem;">
+        En <strong>GOALBET</strong> nos esforzamos en brindar una experiencia segura, transparente y de primer nivel para todos los aficionados al fútbol y pronósticos deportivos.
+      </p>
+
+      <ul class="service-list">
+        <li>
+          <i class="fa-solid fa-circle-check"></i>
+          <div><strong>Atención Personalizada 24/7:</strong> Soporte directo los 7 días de la semana para atender cualquier consulta técnica o de pronósticos.</div>
+        </li>
+
+        <li>
+          <i class="fa-solid fa-circle-check"></i>
+          <div><strong>Transparencia y Precisión:</strong> Cuotas y resultados verificados al instante con marcadores oficiales.</div>
+        </li>
+
+        <li>
+          <i class="fa-solid fa-circle-check"></i>
+          <div><strong>Trato Humano y Responsable:</strong> Garantizamos privacidad y comunicación directa.</div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="direct-card">
+
+      <div class="service-badge">
+        <i class="fa-solid fa-comments"></i>
+        Estamos para ayudarte
+      </div>
+
+      <h4 style="font-family:'Montserrat', sans-serif; font-size:1.2rem; color:#fff; margin-bottom:12px;">
+        ¡Contáctanos!
+      </h4>
+
+      <p style="color:var(--text-gray); line-height:1.6; margin-bottom:18px;">
+        Estamos aquí para resolver tus dudas. Elige tu medio de contacto preferido.
+      </p>
+
+      <!-- CORREO -->
+      <a href="mailto:jhobcoaquiralaura@gmail.com"
+         style="display:flex; align-items:center; gap:15px; padding:16px; margin-bottom:14px; background:#102b47; border:1px solid var(--border-blue); border-radius:12px; text-decoration:none; color:white;">
+
+        <i class="fa-solid fa-envelope" style="font-size:1.8rem; color:var(--accent-green);"></i>
+
+        <div>
+          <small style="display:block; color:var(--text-gray);">CORREO ELECTRÓNICO</small>
+          <strong style="color:white; overflow-wrap:anywhere;">jhobcoaquiralaura@gmail.com</strong>
+        </div>
+      </a>
+
+      <!-- WHATSAPP -->
+      <a href="https://wa.me/51930956318"
+         target="_blank"
+         rel="noopener noreferrer"
+         style="display:flex; align-items:center; gap:15px; padding:16px; margin-bottom:18px; background:#102b47; border:1px solid var(--border-blue); border-radius:12px; text-decoration:none; color:white;">
+
+        <i class="fa-brands fa-whatsapp" style="font-size:2rem; color:#25d366;"></i>
+
+        <div>
+          <small style="display:block; color:var(--text-gray);">WHATSAPP / TELÉFONO</small>
+          <strong style="color:white;">930 956 318</strong>
+        </div>
+      </a>
+
+      <!-- BOTÓN -->
+      <a href="https://wa.me/51930956318"
+         target="_blank"
+         rel="noopener noreferrer"
+         class="btn-whatsapp">
+
+        <i class="fa-brands fa-whatsapp"></i>
+        Escribir por WhatsApp
+      </a>
+
+    </div>
+  </div>
+</section>
